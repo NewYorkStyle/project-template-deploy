@@ -17,4 +17,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd project-template-deploy
+            chmod +x deploy.sh 
             ./deploy.sh all
