@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# Устанавливаем права на сам скрипт если нужно
+if [ ! -x "$0" ]; then
+    chmod +x "$0"
+fi
+
 SERVICE=${1:-all}
 
 echo "🚀 Starting deploy for: $SERVICE"
