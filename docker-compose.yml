@@ -1,12 +1,14 @@
 services:
-  # Nginx (reverse proxy)
   nginx:
     build: ./nginx
     ports:
       - "80:80"
+      - "8888:8888"
     depends_on:
       - frontend
       - backend
+    volumes:
+      - /home/deployer/allure-reports:/usr/share/nginx/allure:ro
     restart: unless-stopped
 
   # PostgreSQL database
