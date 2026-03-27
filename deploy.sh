@@ -36,10 +36,12 @@ case $SERVICE in
         ;;
     "all")
         echo "🔄 Deploying all services..."
+
         cd ../project-template-back && git fetch origin && git reset --hard origin/master && cd -
         cd ../project-template-front && git fetch origin && git reset --hard origin/master && cd -
+
         cd /home/deployer/project-template-deploy
-        docker compose down
+
         docker compose up -d --build
         ;;
     *)
