@@ -4,8 +4,9 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - "80:80"
-      - "8888:8888"
+      - "80:80" # ← HTTP
+      - "8888:8888" # ← Allure
+      - "8081:8081" # ← Swagger
     depends_on:
       frontend:
         condition: service_started
