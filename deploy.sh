@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-
 # Устанавливаем права на сам скрипт если нужно
 if [ ! -x "$0" ]; then
     chmod +x "$0"
@@ -12,7 +11,6 @@ echo "🚀 Starting deploy for: $SERVICE"
 
 cd /home/deployer/project-template-deploy
 
-# Обновляем deploy репозиторий
 echo "📥 Updating deploy repository..."
 git fetch origin
 git reset --hard origin/master
@@ -24,29 +22,23 @@ case $SERVICE in
         docker compose pull backend
         docker compose up -d backend
         ;;
+
     "frontend")
         echo "🎨 Deploying frontend..."
-
-        cd ../project-template-front
-        git fetch origin
-        git reset --hard origin/master
-        cd ../project-template-deploy
 
         docker compose pull frontend
         docker compose up -d frontend
         ;;
+
     "all")
         echo "🔄 Deploying all services..."
 
-        cd ../project-template-deploy
-
-        docker compose pull backend
-        docker compose pull frontend
-        docker compose up -d --build
+        docker compose pull
+        docker compose up -d
         ;;
+
     *)
         echo "❌ Unknown service: $SERVICE"
-        echo "Usage: ./deploy.sh [backend|frontend|all]"
         exit 1
         ;;
 esac
