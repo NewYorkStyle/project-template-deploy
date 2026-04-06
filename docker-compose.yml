@@ -51,7 +51,7 @@ services:
           memory: 256M
 
   backend:
-    image: ghcr.io/NewYorkStyle/project-template-back:latest
+    image: ghcr.io/newyorkstyle/project-template-back:latest
     env_file: .env
     environment:
       - NODE_ENV=${NODE_ENV}
