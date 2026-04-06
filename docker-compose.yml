@@ -87,9 +87,7 @@ services:
           memory: 256M
 
   frontend:
-    build:
-      context: ../project-template-front
-      dockerfile: Dockerfile
+    image: ghcr.io/newyorkstyle/project-template-front:latest
     restart: unless-stopped
     deploy:
       resources:

@@ -32,17 +32,16 @@ case $SERVICE in
         git reset --hard origin/master
         cd ../project-template-deploy
 
-        docker compose up -d --build frontend
+        docker compose pull frontend
+        docker compose up -d frontend
         ;;
     "all")
         echo "🔄 Deploying all services..."
 
-        cd ../project-template-front
-        git fetch origin
-        git reset --hard origin/master
         cd ../project-template-deploy
 
         docker compose pull backend
+        docker compose pull frontend
         docker compose up -d --build
         ;;
     *)
