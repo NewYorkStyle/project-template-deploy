@@ -20,28 +20,29 @@ git reset --hard origin/master
 case $SERVICE in
     "backend")
         echo "🔧 Deploying backend..."
-        cd ../project-template-back
-        git fetch origin
-        git reset --hard origin/master
-        cd ../project-template-deploy
-        docker compose up -d --build backend
+
+        docker compose pull backend
+        docker compose up -d backend
         ;;
     "frontend")
         echo "🎨 Deploying frontend..."
+
         cd ../project-template-front
         git fetch origin
         git reset --hard origin/master
         cd ../project-template-deploy
+
         docker compose up -d --build frontend
         ;;
     "all")
         echo "🔄 Deploying all services..."
 
-        cd ../project-template-back && git fetch origin && git reset --hard origin/master && cd -
-        cd ../project-template-front && git fetch origin && git reset --hard origin/master && cd -
+        cd ../project-template-front
+        git fetch origin
+        git reset --hard origin/master
+        cd ../project-template-deploy
 
-        cd /home/deployer/project-template-deploy
-
+        docker compose pull backend
         docker compose up -d --build
         ;;
     *)
@@ -52,4 +53,5 @@ case $SERVICE in
 esac
 
 echo "✅ Deploy completed for: $SERVICE"
+
 docker system prune -f
